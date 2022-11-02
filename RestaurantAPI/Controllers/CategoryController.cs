@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces.IServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace RestaurantAPI.Controllers
@@ -15,6 +16,7 @@ namespace RestaurantAPI.Controllers
             _service = serviceManager;
             _logger = logger;
         }
+        [Authorize]
         [HttpGet(Name = "GetCategories")]
         public async Task<IActionResult> GetCategoriesAsync()
         {
@@ -30,7 +32,7 @@ namespace RestaurantAPI.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
-        [HttpGet("{id:int}",Name = "GetCategories")]
+        [HttpGet("{id:int}",Name = "GetCategoryById")]
         public async Task<IActionResult> GetCategoryByIdAsync(int id)
         {
             var category = await _service.CategoryService.GetCategoryById(id,trackChanges: false);

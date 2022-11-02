@@ -9,5 +9,6 @@ namespace Application.Interfaces.IServices
     public interface IServiceManager
     {
         public ICategoryService CategoryService { get; }
+        public IAuthenticationService AuthenticationService { get; }
     }
 }
