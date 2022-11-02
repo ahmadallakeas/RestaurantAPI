@@ -18,8 +18,8 @@ namespace Persistance
         public static void AddPersistanceServices(this IServiceCollection services, IConfiguration configuration)
         {
             ConfigureDbContext(services, configuration);
-            ConfigureIdentity(services);
             ConfigureRepositoryManager(services);
+            ConfigureIdentity(services);
         }
         public static void ConfigureDbContext(IServiceCollection service, IConfiguration configuration)
         {
@@ -30,14 +30,16 @@ namespace Persistance
             services.AddScoped<IRepositoryManager, RepositoryManager>();
         }
         public static void ConfigureIdentity(IServiceCollection services)
-        { var builder = services.AddIdentity<User, IdentityRole>(
+        {
+            var builder = services.AddIdentity<User, IdentityRole>(
             o => {
                 o.Password.RequireDigit = true;
                 o.Password.RequireLowercase = false;
                 o.Password.RequireUppercase = false;
                 o.Password.RequireNonAlphanumeric = false;
                 o.Password.RequiredLength = 10; o.User.RequireUniqueEmail = true;
-            }).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders(); 
+            }).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
         }
+
     }
 }

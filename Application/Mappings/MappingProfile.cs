@@ -1,5 +1,6 @@
 ﻿using Application.DataTransfer;
 using AutoMapper;
+using Domain;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ namespace Application.Mappings
         public MappingProfile()
         {
             CreateMap<Category, CategoryDto>();
+            CreateMap<UserForRegistrationDto, User>();
+            CreateMap<UserForAuthenticationDto, User>();    
         }
     }
 }
