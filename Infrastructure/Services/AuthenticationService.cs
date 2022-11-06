@@ -34,7 +34,7 @@ namespace Infrastructure.Services
             _jwtConfiguration = configuration.Value;
         }
 
-        public async Task<IdentityResult> RegisterUser(UserForRegistrationDto userForRegistration)
+        public async Task<IdentityResult> RegisterUserAsync(UserForRegistrationDto userForRegistration)
         {
             var user = _mapper.Map<User>(userForRegistration);
             var result = await _manager.CreateAsync(user, userForRegistration.Password);
@@ -44,12 +44,12 @@ namespace Infrastructure.Services
             }
             return result;
         }
-        public async Task<bool> ValidateUser(UserForAuthenticationDto userForAuthentication)
+        public async Task<bool> ValidateUserAsync(UserForAuthenticationDto userForAuthentication)
         {
             _user = await _manager.FindByNameAsync(userForAuthentication.UserName);
             return (_user != null && await _manager.CheckPasswordAsync(_user, userForAuthentication.Password));
         }
-        public async Task<TokenDto> CreateToken()
+        public async Task<TokenDto> CreateTokenAsync()
         {
             var signingCredentials = GetSigningCredentials();
             var claims = await GetClaims();

@@ -10,8 +10,8 @@ namespace Application.Interfaces.IServices
 {
     public interface IAuthenticationService
     {
-        Task<IdentityResult> RegisterUser(UserForRegistrationDto userForRegistration);
-        Task<bool> ValidateUser(UserForAuthenticationDto userForAuth);
-        Task<TokenDto> CreateToken();
+        Task<IdentityResult> RegisterUserAsync(UserForRegistrationDto userForRegistration);
+        Task<bool> ValidateUserAsync(UserForAuthenticationDto userForAuth);
+        Task<TokenDto> CreateTokenAsync();
     }
 }

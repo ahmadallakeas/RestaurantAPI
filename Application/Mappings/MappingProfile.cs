@@ -15,8 +15,13 @@ namespace Application.Mappings
         public MappingProfile()
         {
             CreateMap<Category, CategoryDto>();
+            CreateMap<CategoryDto,Category>();
+            CreateMap<CategoryForCreationDto, Category>();
+            CreateMap<CategoryForUpdateDto, Category>();
             CreateMap<UserForRegistrationDto, User>();
-            CreateMap<UserForAuthenticationDto, User>();    
+            CreateMap<UserForAuthenticationDto, User>();   
+            CreateMap<MealForCategoryCreationDto, Meal>();  
+            
         }
     }
 }

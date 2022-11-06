@@ -18,7 +18,7 @@ namespace RestaurantAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Register([FromBody] UserForRegistrationDto userForRegistration)
         {
-            var result = await _service.AuthenticationService.RegisterUser(userForRegistration);
+            var result = await _service.AuthenticationService.RegisterUserAsync(userForRegistration);
             if (!result.Succeeded)
             {
                 foreach (var error in result.Errors)
@@ -33,11 +33,11 @@ namespace RestaurantAPI.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto userForAuthentication)
         {
-            if (!await _service.AuthenticationService.ValidateUser(userForAuthentication))
+            if (!await _service.AuthenticationService.ValidateUserAsync(userForAuthentication))
             {
                 return Unauthorized();
             }
-            var token = await _service.AuthenticationService.CreateToken();
+            var token = await _service.AuthenticationService.CreateTokenAsync();
             return Ok(token);
         }
     }

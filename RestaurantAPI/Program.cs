@@ -6,13 +6,17 @@ using RestaurantAPI.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.AddControllers();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddApplicationServices();
 builder.Services.AddPersistanceServices(builder.Configuration);
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddAuthentication();
+
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
 
 var app = builder.Build();
 
